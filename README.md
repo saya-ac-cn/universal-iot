@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# 项目说明
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本项目作为构建通用物联网的前端项目，主题采用react+less+antd。其中第一个tag版本作为标准化的模板项目，可以直接使用。
 
-## Available Scripts
+## 重要说明！！！
+* 本版本使用了较高版本的antd，不完全兼容上一个版本
+* 页面路由绝对禁止出现/backend、/frontend、/warehouse（远景包括map）
+* 在定义接口代理时，上述的路由单词已经被定义，如果使用，刷新页面将出现404
 
-In the project directory, you can run:
+## 构建步骤
 
-### `npm start`
+### 创建项目
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* create-react-app universal-iot
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> Tips:如果提示-bash: create-react-app: command not found，请使用sudu npm install -g create-react-app进行安装
 
-### `npm test`
+### 安装antd
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* npm install antd
 
-### `npm run build`
+### 按需加载
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* npm install  react-app-rewired customize-cra babel-plugin-import
+* 在根目录创建config-overrides.js文件，并写入内容
+* 修改package.json文件
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+改为：
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  目的是启动运行项目时加载config-overrides.js配置文件
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 自定义主题
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* 下载工具包 npm install less less-loader
+* 修改config-overrides.js
 
-### `npm run eject`
+### 引入路由
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```shell script
+  npm add react-router-dom
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 安装 axios
+```shell script
+    npm add axios
+```
+### 安装 store
+```shell script
+    npm install store
+```
+### 安装 http-proxy-middleware 用于设置多个代理
+```shell script
+    npm install http-proxy-middleware
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 重大变更历程事件
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> ## 2021-10-18 修改记录-重大修改
+* 完成项目初始架构，及标准化模板构建

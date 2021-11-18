@@ -1,17 +1,27 @@
+/**
+ * 入口js
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import storageUtils from './utils/storageUtils'
+import memoryUtils from './utils/memoryUtils'
+import {ConfigProvider} from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import './console'
+// 默认语言为 en-US，如果你需要设置其他语言，推荐在入口文件全局设置 locale
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import locale from 'antd/es/locale/zh_CN';
 
+// 读取local中保存user, 保存到内存中
+const user = storageUtils.getUser();
+memoryUtils.user = user;
+
+// 国际化设置，设置中文
+// 将App组件标签渲染到index页面的div上
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <ConfigProvider locale={zhCN}>
+        <App/>
+    </ConfigProvider>, document.getElementById('root'));
