@@ -68,6 +68,11 @@
 > ## 2021-10-18 修改记录-重大修改
 * 完成项目初始架构，及标准化模板构建
 
+> ## 2022-05-21 代码封存
+* 将之前的master分支代码检出到admin-layout-template
+* admin-layout-template作为标准的后台管理项目
+
+
 ### 大数据模板
 http://www.bootstrapmb.com/tag/dashuju
 http://www.bootstrapmb.com/item/8615
