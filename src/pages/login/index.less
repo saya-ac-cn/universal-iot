@@ -1,260 +1,114 @@
-.login-register-container {
+@import '../../config/var.less';
+
+.login-page{
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100vw;
-  /* 加载背景图 */
-  /*background-image: url('./images/login_background1.jpg');*/
-  /* 背景图垂直、水平均居中 */
-  //background-position: center center;
-  /* 背景图不平铺 */
-  //background-repeat: no-repeat;
-  /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
-  //background-attachment: fixed;
-  /* 让背景图基于容器大小伸缩 */
-  //background-size: cover;
-  //background-attachment: fixed;
-  .second-background{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  color: @theme-color-3;
+  font-size: 12px;
+  font-family: "微软雅黑","arial";
+  padding: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /*头部区域*/
+  header {
     width: 100vw;
-    position: absolute;
-    top:10%;
-    bottom: 10%;
-    background-position: right 85% top 20%;
-    background-repeat: no-repeat;
-    background-size: 50%;
-    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-
-    /* 登录注册容器 */
-    .login-register-box {
-      width: 100%;
-      max-width: 36em;
-      position: absolute;
-      top: 50%;
-      right: 5%;
-      transform: translate(5%, -50%);
-      -webkit-transform: translate(5%, -50%);
-      -ms-transform: translate(5%, -50%);
-      /* 登录相关 */
-
-      .login-box {
-        position: relative;
-        top: 0;
-        opacity: 1;
-        float: left;
-        padding: 4em 4em 4em 3.6em;
-        width: 100%;
-        background: #fff;
-        border-radius: 0.7em;
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-        z-index: 5;
-        transition: 400ms cubic-bezier(.4, 0, .2, 1);
-        -webkit-transition: 400ms cubic-bezier(.4, 0, .2, 1);
-        -ms-transition: 400ms cubic-bezier(.4, 0, .2, 1);
-      }
-
-
-      /* 登录相关 */
-
-      .ant-input {
-        outline: none !important;
-        z-index: 10;
-        border: none !important;
-      }
-
-      /*  antd 文本框去除边框*/
-
-      .ant-input:focus {
-        border: none;
-        /* border-bottom: 1px solid white !important;*/
-        box-shadow: none;
-      }
-
-      /** 登录注册公共区域 **/
-
-      .title {
-        width: 100%;
-        float: left;
-        line-height: 1.5em;
-        font-size: 2.6em;
-        font-weight: 700;
-        letter-spacing: 0.2em;;
-        color: #7bc0fe;
-        position: relative;
-      }
-
-      .title:before {
-        content: "";
-        width: 0.2em;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: -1.4em;
-        background: #7bc0fe;
-      }
-
-      .input,
-      .input label,
-      .input input,
-      .input .spin,
-      .button,
-      .button.login button {
-        outline: none;
-        transition: 300ms cubic-bezier(.4, 0, .2, 1);
-        -webkit-transition: 300ms cubic-bezier(.4, 0, .2, 1);
-        -ms-transition: 300ms cubic-bezier(.4, 0, .2, 1);
-      }
-
-
-      .input,
-      .input label,
-      .input input,
-      .input .spin,
-      .button,
-      .button button {
-        width: 100%;
-        float: left;
-      }
-
-      .input,
-      .button {
-        margin-top: 30px;
-        height: 70px;
-      }
-
-      .input,
-      .input input,
-      .button,
-      .button button {
-        position: relative;
-      }
-
-      .input input {
-        height: 60px;
-        top: 10px;
-        background: transparent;
-      }
-
-      .input input,
-      .input label,
-      .button button {
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        color: rgba(0, 0, 0, 0.8);
-        font-weight: 300;
-        outline: none;
-      }
-
-      .input:before,
-      .input .spin {
-        width: 100%;
-        height: 0.1em;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-      }
-
-      .input:before {
-        content: "";
-        background: rgba(0, 0, 0, 0.1);
-        z-index: 3;
-      }
-
-      .input .spin {
-        background: #7bc0fe;
-        z-index: 4;
-        width: 0;
-      }
-
-      .input label {
-        position: absolute;
-        top: 10px;
-        left: 0;
-        z-index: 2;
-        cursor: pointer;
-        line-height: 60px;
-      }
-
-      .button.login {
-        width: 60%;
-        left: 20%;
-      }
-
-      .button.login button,
-      .button button {
-        height: 2.5em;
-        width: 100%;
-        left: 0%;
-        background-color: transparent;
-        border: 0.1em solid rgba(0, 0, 0, 0.1);
-        font-weight: 900;
-        border-radius: 0.4em;
-        font-size: 1.4em;
-        color: rgba(0, 0, 0, 0.2);
-        /*outline:none;*/
-      }
-
-      .button.login {
-        margin-top: 3em;
-      }
-
-      .button {
-        margin-top: 2em;
-      }
-
-      .button button {
-        background-color: #fff;
-        color: #7bc0fe;
-        /* border: none;*/
-      }
-
-      .button.login button.active {
-        border: 0.1em solid transparent;
-        color: #fff !important;
-      }
-
-      .button.login button.active span {
-        opacity: 0;
-        transform: scale(0);
-        -webkit-transform: scale(0);
-        -ms-transform: scale(0);
-      }
-
-
-      .button.login button:focus {
-        color: #fff !important;
-        background: #7bc0fe;
-      }
-
-
-      .button.login button:hover {
-        color: #7bc0fe;
-        border-color: #7bc0fe;
-      }
-
-      .button {
-        margin: 1.5em 0;
-        overflow: hidden;
-        z-index: 2;
-      }
-
-      .button button {
-        cursor: pointer;
-        position: relative;
-        z-index: 2;
-      }
-
-      .pass-forgot {
-        width: 100%;
-        float: left;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.4);
-        font-size: 1.2em;
-      }
-
+    /*头部技术支持区域*/
+    .header-nav{
+      background-color: @theme-color-1;
+      color: @theme-color-0;
+      padding: 14px;
+      text-align: right;
+      font-size: 13px;
     }
 
+    /*头部项目名区域*/
+    .header-banner{
+      background-color:@theme-color-2;
+      border-color: transparent;
+      height: 150px;
+      /*头部项目名和用户的容器*/
+      .project-user{
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+        /*头部项目名区域*/
+        .project-div{
+          width: 160px;
+          color: @theme-color-0;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          font-weight: bolder;
+          font-size: 22px;
+        }
+        /*头部用户区域*/
+        .login-icon {
+          height: 60px;
+          width: 60px;
+          padding: 13px;
+          border-radius: 50%;
+          font-size: 30px;
+          margin-bottom: 20px;
+          color: @theme-color-0;
+          text-align: center;
+          cursor: pointer;
+          background-color: @theme-color-1;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+        }
+
+      }
+    }
   }
+
+  section {
+    .main{
+      padding-top: 2em;
+      padding-bottom: 2em;
+      height:auto;
+      min-height: 400px;
+      /*页面栏目的分割线*/
+      .page-head-line{
+        font-weight: 900;
+        padding-bottom: 20px;
+        border-bottom: 2px solid @theme-color-3;
+        text-transform: uppercase;
+        color: @theme-color-3;
+        font-size: 20px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  /*底部版权区域*/
+  footer{
+    color: @theme-color-0;
+    background-color: @theme-color-3;
+    padding: 20px 0;
+    position: fixed;;
+    bottom: 0;
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*底部版权区域文字*/
+    span {
+      float:left;
+      padding-right: 24px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+  }
+
 }

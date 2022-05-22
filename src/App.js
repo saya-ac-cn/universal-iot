@@ -18,7 +18,7 @@ function App() {
             */}
             <Switch>
                 <Route path={['/login','/']} exact={true} component={Login}/>
-                <Route path='/backstage' component={Backend1}/>
+                {/*<Route path='/backstage' component={Backend1}/>*/}
                {/* <Route path='/' component={Home}/>*/}
             </Switch>
         </BrowserRouter>
