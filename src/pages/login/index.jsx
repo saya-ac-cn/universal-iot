@@ -95,8 +95,8 @@ class Login extends Component {
                 <h4 className="page-head-line">用户身份认证入口</h4>
               </Col>
             </Row>
-            <Row gutter={6}>
-              <Col span={9} offset={4}>
+            <Row>
+              <Col span={8} offset={3}>
                 <h4>请通过账号和密码进行登录</h4>
                 <hr/>
                 <br/>
@@ -113,7 +113,7 @@ class Login extends Component {
                   <span className="fa fa-user">&nbsp;进入平台</span>&nbsp;
                 </a>
               </Col>
-              <Col span={9}>
+              <Col span={8} offset={2}>
                 <Alert
                   message={<strong>亲爱的用户，欢迎使用本服务平台。在使用之前，请您务必注意以下须知：</strong>}
                   description={
