@@ -92,6 +92,14 @@ html, body {
     background-color: #e8f3e2;
 }
 
+.text-left{
+  text-align: left;
+}
+
+.text-right{
+  text-align: right;
+}
+
 #root {
     height: 100%;
     width: 100%;

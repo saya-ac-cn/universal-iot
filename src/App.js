@@ -1,7 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Login from './pages/login/index'
-import Backend1 from './pages/layout/backend1'
 /**
  * 应用根组件
  * @returns {*}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.less'
-import {Button,message, Col} from 'antd';
+import {Alert,message, Row,Col} from 'antd';
+import {UserAddOutlined,NotificationOutlined} from '@ant-design/icons';
 import {requestLogin} from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
@@ -60,12 +61,12 @@ class Login extends Component {
       <div className="login-page">
         <header>
           <div className="header-nav">
-            <Col>
+            <Col span={18} offset={3}>
               <strong>Email:</strong> saya@saya.ac.cn&nbsp;&nbsp; <strong>Support:</strong> 极客印记实验室中心
             </Col>
           </div>
           <div className="header-banner">
-            <div className="container">
+            <Col span={18} offset={3}>
               <div className="project-user">
                 <div className="project-div">
                   <div className="text-left">
@@ -75,35 +76,27 @@ class Login extends Component {
                     + 控制中心
                   </div>
                 </div>
-                <div style={{paddingLeft: '30px',width:'70px'}}>
-                  <i className="fa fa-user-plus login-icon"/>
+                <div className="user-div">
+                  <UserAddOutlined className="login-icon"/>
                 </div>
               </div>
-            </div>
+            </Col>
           </div>
         </header>
         <section>
-          <div className="alert alert-success alert-dismissable">
-            <button type="button" className="close" data-dismiss="alert"
-                    aria-hidden="true">
-              &times;
-            </button>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-12">
-                  <span className="fa fa-bullhorn"/>&nbsp;:&nbsp;由于物联网的特殊性，为了您的设备安全。请您妥善保管好您的密码，请不要在公共场合登录使用!
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="container main">
-            <div className="row">
-              <div className="col-md-12">
+          <Alert
+            message={<Col span={18} offset={3} className="notice-div"><NotificationOutlined/>：由于物联网的特殊性，为了您的设备安全。请您妥善保管好您的密码，请不要在公共场合登录使用!</Col>}
+            type="success"
+            closable
+          />
+          <div className="main">
+            <Row>
+              <Col span={18} offset={3}>
                 <h4 className="page-head-line">用户身份认证入口</h4>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
+              </Col>
+            </Row>
+            <Row gutter={6}>
+              <Col span={9} offset={4}>
                 <h4>请通过账号和密码进行登录</h4>
                 <hr/>
                 <br/>
@@ -119,37 +112,44 @@ class Login extends Component {
                    style={{backgroundColor:'#9cb17e',borderColor: 'transparent'}} id="go">
                   <span className="fa fa-user">&nbsp;进入平台</span>&nbsp;
                 </a>
-              </div>
-              <div className="col-md-6">
-                <div className="alert alert-info">
-                  <strong>亲爱的用户，欢迎使用本服务平台。在使用之前，请您务必注意以下须知：</strong>
-                  <ul>
-                    <li>设备启动后，主板上的指示灯先常亮，待设备自检完毕后，指示灯将熄灭</li>
-                    <li>设备默认开启STA（作为无线终端接入路由器）+AP（自开启无线热点）</li>
-                    <li>设备默认开启的WIFI名称为：极客印记**，密码参见设备底部标签</li>
-                    <li>在没有连接上路由器的前提下，您只能通过连接本设备的WIFI进行设置</li>
-                    <li>平台的管理入口地址为：192.168.4.1（需要连接本设备WIFI）</li>
-                    <li>若账号在正常情况下，无法登录时，请及时联系实验室中心</li>
-                  </ul>
-                </div>
-                <div className="alert alert-success">
-                  <strong>功能介绍:</strong>
-                  <ul>
-                    <li>支持STA（作为无线终端接入路由器）/AP（自开启无线热点）模式参数自定义配置</li>
-                    <li>支持本地局域网&基于MQTT的远程控制</li>
-                    <li>支持MQTT服务器自定义配置</li>
-                    <li>支持传感器数据的上报采集</li>
-                    <li>支持设备的远程控制</li>
-                    <li>支持指标&事件联动</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              </Col>
+              <Col span={9}>
+                <Alert
+                  message={<strong>亲爱的用户，欢迎使用本服务平台。在使用之前，请您务必注意以下须知：</strong>}
+                  description={
+                    <ul>
+                      <li>设备启动后，主板上的指示灯先常亮，待设备自检完毕后，指示灯将熄灭</li>
+                      <li>设备默认开启STA（作为无线终端接入路由器）+AP（自开启无线热点）</li>
+                      <li>设备默认开启的WIFI名称为：极客印记**，密码参见设备底部标签</li>
+                      <li>在没有连接上路由器的前提下，您只能通过连接本设备的WIFI进行设置</li>
+                      <li>平台的管理入口地址为：192.168.4.1（需要连接本设备WIFI）</li>
+                      <li>若账号在正常情况下，无法登录时，请及时联系实验室中心</li>
+                    </ul>
+                  }
+                  type="warning"
+                />
+                <br/>
+                <Alert
+                  message={<strong>功能介绍：</strong>}
+                  description={
+                    <ul>
+                      <li>支持STA（作为无线终端接入路由器）/AP（自开启无线热点）模式参数自定义配置</li>
+                      <li>支持本地局域网&基于MQTT的远程控制</li>
+                      <li>支持MQTT服务器自定义配置</li>
+                      <li>支持传感器数据的上报采集</li>
+                      <li>支持设备的远程控制</li>
+                      <li>支持指标&事件联动</li>
+                    </ul>
+                  }
+                  type="success"
+                />
+              </Col>
+            </Row>
           </div>
         </section>
-        <div style={{height: '100px'}}/>
+
         <footer>
-          <div className="container">
+          <Col span={18} offset={3}>
             <p>Copyright © 2016-
               <script>document.write(new Date().getFullYear())</script>
               Saya.ac.cn-极客印记 All rights reserved 国家工信部域名备案信息：[<a href="https://beian.miit.gov.cn/"
@@ -158,7 +158,7 @@ class Login extends Component {
             </p>
             <p>通讯地址：四川省宜宾市五粮液大道东段酒圣路8号(宜宾学院本部) 邮编：644000 Email：saya@saya.ac.cn</p>
             <p>建议您使用Google Chrome，分辨率1920*1080及以上浏览，获得更好用户体验</p>
-          </div>
+          </Col>
         </footer>
       </div>
     );

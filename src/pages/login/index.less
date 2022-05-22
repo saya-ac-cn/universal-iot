@@ -11,9 +11,6 @@
   margin: 0;
   top: 0;
   bottom: 0;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
 
   /*头部区域*/
   header {
@@ -26,7 +23,7 @@
     .header-nav{
       background-color: @theme-color-1;
       color: @theme-color-0;
-      padding: 14px;
+      padding: 14px 0 14px 14px;
       text-align: right;
       font-size: 13px;
     }
@@ -51,27 +48,35 @@
           font-weight: bolder;
           font-size: 22px;
         }
-        /*头部用户区域*/
-        .login-icon {
-          height: 60px;
-          width: 60px;
-          padding: 13px;
-          border-radius: 50%;
-          font-size: 30px;
-          margin-bottom: 20px;
-          color: @theme-color-0;
-          text-align: center;
-          cursor: pointer;
-          background-color: @theme-color-1;
-          -webkit-border-radius: 50%;
-          -moz-border-radius: 50%;
+        .user-div{
+          margin-left: 30px;
+          width: 5em;
+          height: 5em;
+
+          /*头部用户区域*/
+          .login-icon {
+            height: 60px;
+            width: 60px;
+            padding: 13px;
+            font-size: 30px;
+            color: @theme-color-0;
+            cursor: pointer;
+            background-color: @theme-color-1;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+          }
         }
+
 
       }
     }
   }
 
   section {
+    .notice-div{
+      color: @theme-color-4;
+    }
     .main{
       padding-top: 2em;
       padding-bottom: 2em;
@@ -94,14 +99,13 @@
   footer{
     color: @theme-color-0;
     background-color: @theme-color-3;
-    padding: 20px 0;
     position: fixed;;
     bottom: 0;
     width: 100vw;
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     /*底部版权区域文字*/
     span {
       float:left;
