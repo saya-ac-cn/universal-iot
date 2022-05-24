@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.less'
-import {Alert,message, Row,Col} from 'antd';
-import {UserAddOutlined,NotificationOutlined} from '@ant-design/icons';
+import {Alert,message, Row,Col, Form, Input, Button,} from 'antd';
+import {UserAddOutlined,NotificationOutlined,UserOutlined} from '@ant-design/icons';
 import {requestLogin} from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
@@ -97,21 +97,18 @@ class Login extends Component {
             </Row>
             <Row>
               <Col span={8} offset={3}>
-                <h4>请通过账号和密码进行登录</h4>
-                <hr/>
-                <br/>
-                <label>用户名 : </label>
-                <input type="text" className="form-control" id="name" maxLength="32" placeholder="请输入账号"/>
-                <br/>
-                <label>密码 : </label>
-                <input type="password" className="form-control" id="password" maxLength="32" placeholder="请输入密码"/>
-                <br/>
-                <hr/>
-                <br/>
-                <a href="javascript:void(0)" className="btn btn-info"
-                   style={{backgroundColor:'#9cb17e',borderColor: 'transparent'}} id="go">
-                  <span className="fa fa-user">&nbsp;进入平台</span>&nbsp;
-                </a>
+                <h4 className="login-form-title">请通过账号和密码进行登录</h4>
+                <Form layout='vertical'>
+                  <Form.Item label="用户名">
+                    <Input type='text' placeholder="请输入用户名" />
+                  </Form.Item>
+                  <Form.Item label="密码">
+                    <Input type='password' placeholder="请输入密码" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button type="primary" className="login-button"><UserOutlined />进入平台</Button>
+                  </Form.Item>
+                </Form>
               </Col>
               <Col span={8} offset={2}>
                 <Alert

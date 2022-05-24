@@ -1,16 +1,13 @@
 @import '../../config/var.less';
 
 .login-page{
-  position: absolute;
-  overflow-x: hidden;
-  overflow-y: hidden;
   color: @theme-color-3;
   font-size: 12px;
   font-family: "微软雅黑","arial";
-  padding: 0;
-  margin: 0;
-  top: 0;
-  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+
 
   /*头部区域*/
   header {
@@ -18,7 +15,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-
     /*头部技术支持区域*/
     .header-nav{
       background-color: @theme-color-1;
@@ -74,6 +70,7 @@
   }
 
   section {
+    min-height: calc(100% - 300px);
     .notice-div{
       color: @theme-color-4;
     }
@@ -92,6 +89,18 @@
         font-size: 20px;
         margin-bottom: 40px;
       }
+      .login-form-title{
+        padding-bottom: 20px;
+        border-bottom: 1px solid @theme-color-3;
+        text-transform: uppercase;
+        color: @theme-color-3;
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+      .login-button{
+        background-color:@theme-color-3;
+        border-color: transparent;
+      }
     }
   }
 
@@ -99,8 +108,8 @@
   footer{
     color: @theme-color-0;
     background-color: @theme-color-3;
-    position: fixed;;
-    bottom: 0;
+    //position: fixed;;
+    //bottom: 0;
     width: 100vw;
     height: 100px;
     display: flex;
