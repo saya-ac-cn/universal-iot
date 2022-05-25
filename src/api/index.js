@@ -7,14 +7,11 @@ import ajax from './ajax'
  */
 
 // 后台api接口
-let backendAPI = '/backend';
+let backendAPI = 'api';
 
-// 前台api接口
-let publicAPI = '/frontend';
-let frontendAPI = publicAPI + '/Pandora';
 
 // 登录接口
-export const requestLogin = params => ajax(`${backendAPI}/login`, params, 'POST');
+export const requestLogin = params => ajax(`${backendAPI}/login.action`, params, 'POST');
 // 注销接口
 export const requestLogout = params => ajax(`${backendAPI}/logout`, params, 'POST');
 

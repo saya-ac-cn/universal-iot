@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './index.less'
 import {Alert,message, Row,Col, Form, Input, Button,} from 'antd';
 import {UserAddOutlined,NotificationOutlined,UserOutlined} from '@ant-design/icons';
+import {clearTrimValueEvent} from "../../utils/string";
 import {requestLogin} from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
@@ -15,14 +16,16 @@ import storageUtils from '../../utils/storageUtils'
 // 定义组件（ES6）
 class Login extends Component {
 
+  formRef = React.createRef();
+
   state = {
     // 用户文本框状态
     userState: false,
     // 密码框状态
     pwdState: false,
     // 给用户输入的文本框和密码框
-    userName: 'Pandora',
-    passWord: 'Pandora',
+    name: 'shmily',
+    password: 'shmily',
     loading: false
   };
 
@@ -32,31 +35,28 @@ class Login extends Component {
    */
   loginHandle = async () => {
     let _this = this;
-    let {userName,passWord} = _this.state;
-    if (null === userName || null === passWord || '' === userName || '' === passWord){
-      message.error('请输入用户名和密码');
-      return
-    }
-    let loginParams = {account: userName, password: passWord};
-    this.props.history.replace('/backstage')
-    // TODO 联调接口时，打开
-    // _this.setState({loading: true});
-    // const result = await requestLogin(loginParams);
-    // let {code, data} = result;
-    // _this.setState({loading: false});
-    // if (code === 0) {
-    //   memoryUtils.user = data;// 保存在内存中
-    //   storageUtils.saveUser(data); // 保存到local中
-    //   // 跳转到管理界面 (不需要再回退回到登陆),push是需要回退
-    //   this.props.history.replace('/backstage')
-    // } else if (code === 5) {
-    //   message.error('请输入用户名和密码');
-    // } else {
-    //   message.error('用户名或密码错误');
-    // }
+    _this.formRef.current.validateFields(["name","password"]).then(async (value) =>  {
+      let _params = new URLSearchParams();
+      _params.append('name', value.name);
+      _params.append('password', value.password);
+      const result = await requestLogin(_params);
+      let {code, data} = result;
+      _this.setState({loading: false});
+      if (code === 0) {
+        memoryUtils.user = data;// 保存在内存中
+        storageUtils.saveUser(data); // 保存到local中
+        // 跳转到管理界面 (不需要再回退回到登陆),push是需要回退
+        //this.props.history.replace('/backstage')
+      } else if (code === 5) {
+        message.error('请输入用户名和密码');
+      } else {
+        message.error('用户名或密码错误');
+      }
+    }).catch(e => console.log("修改或添加设备错误",e));
   };
 
   render() {
+    const {name,password} = this.state;
     return (
       <div className="login-page">
         <header>
@@ -98,15 +98,17 @@ class Login extends Component {
             <Row>
               <Col span={8} offset={3}>
                 <h4 className="login-form-title">请通过账号和密码进行登录</h4>
-                <Form layout='vertical'>
-                  <Form.Item label="用户名">
+                <Form layout='vertical' ref={this.formRef}>
+                  <Form.Item label="用户名" name="name" initialValue={name}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
+                             rules={[{required: true, message: '请输入用户名'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
                     <Input type='text' placeholder="请输入用户名" />
                   </Form.Item>
-                  <Form.Item label="密码">
+                  <Form.Item label="密码" name="password" initialValue={password}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
+                             rules={[{required: true, message: '请输入密码'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
                     <Input type='password' placeholder="请输入密码" />
                   </Form.Item>
                   <Form.Item>
-                    <Button type="primary" className="login-button"><UserOutlined />进入平台</Button>
+                    <Button type="primary" onClick={this.loginHandle} className="login-button"><UserOutlined />进入平台</Button>
                   </Form.Item>
                 </Form>
               </Col>
