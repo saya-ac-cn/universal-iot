@@ -7,11 +7,18 @@ import ajax from './ajax'
  */
 
 // 后台api接口
-let backendAPI = 'api';
+let backendAPI = '/api';
 
 
 // 登录接口
 export const requestLogin = params => ajax(`${backendAPI}/login.action`, params, 'POST');
+// 修改密码
+export const updatePassword = params => ajax(`${backendAPI}/password.action`, params, 'POST');
+// 获取mqtt配置
+export const getMqttConfig = params => ajax(`${backendAPI}/mqtt.action`, params, 'GET');
+// 获取mqtt配置
+export const setMqttConfig = params => ajax(`${backendAPI}/mqtt.action`, params, 'POST');
+
 // 注销接口
 export const requestLogout = params => ajax(`${backendAPI}/logout`, params, 'POST');
 

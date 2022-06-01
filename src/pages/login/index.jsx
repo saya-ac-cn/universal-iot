@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import './index.less'
-import {Alert,message, Row,Col, Form, Input, Button,} from 'antd';
-import {UserAddOutlined,NotificationOutlined,UserOutlined} from '@ant-design/icons';
+import {Alert,message, Row,Col, Form, Input, Button,Spin} from 'antd';
+import {NotificationOutlined,UserOutlined} from '@ant-design/icons';
 import {clearTrimValueEvent} from "../../utils/string";
 import {requestLogin} from '../../api'
 import memoryUtils from '../../utils/memoryUtils'
@@ -39,6 +38,7 @@ class Login extends Component {
       let _params = new URLSearchParams();
       _params.append('name', value.name);
       _params.append('password', value.password);
+      _this.setState({loading: true});
       const result = await requestLogin(_params);
       let {code, data} = result;
       _this.setState({loading: false});
@@ -46,44 +46,19 @@ class Login extends Component {
         memoryUtils.user = data;// 保存在内存中
         storageUtils.saveUser(data); // 保存到local中
         // 跳转到管理界面 (不需要再回退回到登陆),push是需要回退
-        //this.props.history.replace('/backstage')
+        this.props.history.replace('/home.html')
       } else if (code === 5) {
         message.error('请输入用户名和密码');
       } else {
         message.error('用户名或密码错误');
       }
-    }).catch(e => console.log("修改或添加设备错误",e));
+    }).catch(e => console.log("登录异常",e));
   };
 
   render() {
-    const {name,password} = this.state;
+    const {name,password,loading} = this.state;
     return (
       <div className="login-page">
-        <header>
-          <div className="header-nav">
-            <Col span={18} offset={3}>
-              <strong>Email:</strong> saya@saya.ac.cn&nbsp;&nbsp; <strong>Support:</strong> 极客印记实验室中心
-            </Col>
-          </div>
-          <div className="header-banner">
-            <Col span={18} offset={3}>
-              <div className="project-user">
-                <div className="project-div">
-                  <div className="text-left">
-                    物联网网关 +
-                  </div>
-                  <div className="text-right">
-                    + 控制中心
-                  </div>
-                </div>
-                <div className="user-div">
-                  <UserAddOutlined className="login-icon"/>
-                </div>
-              </div>
-            </Col>
-          </div>
-        </header>
-        <section>
           <Alert
             message={<Col span={18} offset={3} className="notice-div"><NotificationOutlined/>：由于物联网的特殊性，为了您的设备安全。请您妥善保管好您的密码，请不要在公共场合登录使用!</Col>}
             type="success"
@@ -98,19 +73,21 @@ class Login extends Component {
             <Row>
               <Col span={8} offset={3}>
                 <h4 className="login-form-title">请通过账号和密码进行登录</h4>
-                <Form layout='vertical' ref={this.formRef}>
-                  <Form.Item label="用户名" name="name" initialValue={name}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
-                             rules={[{required: true, message: '请输入用户名'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
-                    <Input type='text' placeholder="请输入用户名" />
-                  </Form.Item>
-                  <Form.Item label="密码" name="password" initialValue={password}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
-                             rules={[{required: true, message: '请输入密码'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
-                    <Input type='password' placeholder="请输入密码" />
-                  </Form.Item>
-                  <Form.Item>
-                    <Button type="primary" onClick={this.loginHandle} className="login-button"><UserOutlined />进入平台</Button>
-                  </Form.Item>
-                </Form>
+                <Spin spinning={loading} delay={500}>
+                  <Form layout='vertical' ref={this.formRef}>
+                    <Form.Item label="用户名" name="name" initialValue={name}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
+                               rules={[{required: true, message: '请输入用户名'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
+                      <Input type='text' placeholder="请输入用户名" />
+                    </Form.Item>
+                    <Form.Item label="密码" name="password" initialValue={password}  getValueFromEvent={ (e) => clearTrimValueEvent(e)}
+                               rules={[{required: true, message: '请输入密码'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
+                      <Input type='password' placeholder="请输入密码" />
+                    </Form.Item>
+                    <Form.Item>
+                      <Button type="primary" onClick={this.loginHandle} className="login-button"><UserOutlined />进入平台</Button>
+                    </Form.Item>
+                  </Form>
+                </Spin>
               </Col>
               <Col span={8} offset={2}>
                 <Alert
@@ -145,20 +122,6 @@ class Login extends Component {
               </Col>
             </Row>
           </div>
-        </section>
-
-        <footer>
-          <Col span={18} offset={3}>
-            <p>Copyright © 2016-
-              <script>document.write(new Date().getFullYear())</script>
-              Saya.ac.cn-极客印记 All rights reserved 国家工信部域名备案信息：[<a href="https://beian.miit.gov.cn/"
-                                                                  rel="noopener noreferrer" style={{color: '#fff'}}
-                                                                  target="_blank">saya.ac.cn/蜀ICP备2021013893号</a>]
-            </p>
-            <p>通讯地址：四川省宜宾市五粮液大道东段酒圣路8号(宜宾学院本部) 邮编：644000 Email：saya@saya.ac.cn</p>
-            <p>建议您使用Google Chrome，分辨率1920*1080及以上浏览，获得更好用户体验</p>
-          </Col>
-        </footer>
       </div>
     );
   }

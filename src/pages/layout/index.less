@@ -1,6 +1,6 @@
 @import '../../config/var.less';
 
-.login-page{
+.layout-page{
   color: @theme-color-3;
   font-size: 12px;
   font-family: "微软雅黑","arial";
@@ -65,6 +65,50 @@
         }
 
 
+      }
+    }
+
+    /*菜单*/
+    .menu-nav{
+      background-color: @theme-color-3;
+      height: auto;
+      .menu-nav-content{
+        display: flex;
+        justify-content: flex-end;
+        align-content: center;
+        align-items: center;
+
+        /*顶部的菜单导航选中时的样式*/
+        .menu-top-active {
+          background-color: @theme-color-2;
+        }
+
+        .nav-bar-nav{
+          list-style: none;
+          float: left;
+          margin: 0;
+          li {
+            float: left;
+          }
+          /*顶部的菜单导航滑过时的样式*/
+          li > a:hover {
+            background-color: @theme-color-1 !important;
+          }
+          li > a:focus {
+            background-color: @theme-color-2 !important;
+          }
+
+          /*顶部的菜单导航默认标签样式*/
+          a {
+            color: #FFF;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 10px 10px 10px;
+            text-transform: uppercase;
+            position: relative;
+            display: block;
+          }
+        }
       }
     }
   }

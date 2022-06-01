@@ -37,7 +37,6 @@ const codeMessage = {
 
 
 export default function ajax(url, data = {}, type = 'GET') {
-  console.log('-----',data)
     return new Promise((resolve, reject) => {
         let promise;
         // 1. 执行异步ajax请求
