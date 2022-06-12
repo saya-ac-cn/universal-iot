@@ -3,8 +3,9 @@ import {Alert,message, Row,Col, Form, Input, Button,Spin} from 'antd';
 import {NotificationOutlined,UserOutlined} from '@ant-design/icons';
 import {clearTrimValueEvent} from "../../utils/string";
 import {requestLogin} from '../../api'
-import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
+import {isEmptyObject} from "../../utils/var";
+import memoryUtils from "../../utils/memoryUtils";
 /*
  * 文件名：index.jsx
  * 作者：刘能凯
@@ -40,11 +41,12 @@ class Login extends Component {
       _params.append('password', value.password);
       _this.setState({loading: true});
       const result = await requestLogin(_params);
-      let {code, data} = result;
+      let {code} = result;
       _this.setState({loading: false});
       if (code === 0) {
-        memoryUtils.user = data;// 保存在内存中
-        storageUtils.saveUser(data); // 保存到local中
+        // 保存到local中
+        memoryUtils.user = {user:value.name};
+        storageUtils.saveUser({user:value.name});
         // 跳转到管理界面 (不需要再回退回到登陆),push是需要回退
         this.props.history.replace('/home.html')
       } else if (code === 5) {
@@ -54,6 +56,13 @@ class Login extends Component {
       }
     }).catch(e => console.log("登录异常",e));
   };
+
+  componentDidMount() {
+    if (!isEmptyObject(storageUtils.getUser())) {
+      // 当前用户已经登录
+      this.props.history.push('/home.html')
+    }
+  }
 
   render() {
     const {name,password,loading} = this.state;

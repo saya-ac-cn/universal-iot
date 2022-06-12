@@ -7,6 +7,10 @@ import DashBoard from "../backend/dashboard";
 import Login from "../login";
 import Password from "../backend/password";
 import Mqtt from "../backend/mqtt";
+import Sta from "../backend/sta";
+import Ap from "../backend/ap";
+import storageUtils from "../../utils/storageUtils";
+import {isEmptyObject} from '../../utils/var'
 /*
  * 文件名：index.jsx
  * 作者：刘能凯
@@ -24,8 +28,6 @@ class Layout extends Component {
       {title:'热点设置',url:'/ap.html'},
       {title:'上网设置',url:'/sta.html'},
       {title:'消息队列',url:'/mqtt.html'},
-      {title:'数据上报',url:'/data.html'},
-      {title:'远程控制',url:'/led.html'},
       {title:'修改密码',url:'/pwd.html'},
     ],
     menuElement:[]
@@ -42,7 +44,6 @@ class Layout extends Component {
   }
 
   switchMenuHandle = (url)=>{
-    console.log(url)
     const _this = this;
     let selectMenu = _this.state.selectMenu
     if (selectMenu===url){
@@ -54,6 +55,10 @@ class Layout extends Component {
   }
 
   componentDidMount() {
+    if (isEmptyObject(storageUtils.getUser())) {
+      // 当前用户未登录
+      this.props.history.push('/login.html')
+    }
     let path = this.props.location.pathname;
     this.refreshMenu(path);
   };
@@ -61,12 +66,6 @@ class Layout extends Component {
 
   render() {
     const {menuElement} = this.state;
-    // const user = memoryUtils.user;
-    // // 如果内存没有存储user ==> 当前没有登陆
-    // if (!user || !user.user) {
-    //   // 自动跳转到登陆(在render()中)
-    //   return <Redirect to='/login'/>
-    // }
     // 得到当前请求的路由路径
     let path = this.props.location.pathname;
     return (
@@ -109,13 +108,11 @@ class Layout extends Component {
 
           <Switch>
             <Route path='/home.html' component={DashBoard}/>
-            <Route path='/ap.html' component={DashBoard}/>
-            <Route path='/sta.html' component={DashBoard}/>
+            <Route path='/ap.html' component={Ap}/>
+            <Route path='/sta.html' component={Sta}/>
             <Route path='/mqtt.html' component={Mqtt}/>
-            <Route path='/data.html' component={DashBoard}/>
-            <Route path='/led.html' component={DashBoard}/>
             <Route path='/pwd.html' component={Password}/>
-            <Route path={['/login','/']} exact={true} component={Login}/>
+            <Route path={['/login.html','/']} exact={true} component={Login}/>
             {/*默认、及匹配不到时的页面*/}
             <Redirect to='/home.html'/>
           </Switch>

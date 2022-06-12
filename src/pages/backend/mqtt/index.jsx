@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert, Button, Col, Form, Input, message, Row, Spin,Switch} from "antd";
+import {Alert, Badge, Button, Col, Form, Input, message, Row, Spin, Switch} from "antd";
 import {clearTrimValueEvent} from "../../../utils/string";
 import {NotificationOutlined,SettingOutlined,CheckOutlined,CloseOutlined} from '@ant-design/icons';
 import {getMqttConfig,setMqttConfig} from "../../../api";
@@ -45,7 +45,7 @@ class Mqtt extends Component {
   }
 
   /**
-   * 响应修改密码事件
+   * 响应修改mqtt事件
    */
   submitHandle = async () => {
     let _this = this;
@@ -83,7 +83,7 @@ class Mqtt extends Component {
         <div className="main">
           <Row>
             <Col span={18} offset={3}>
-              <h4 className="page-head-line">修改密码</h4>
+              <h4 className="page-head-line">消息队列</h4>
             </Col>
           </Row>
           <Row>
@@ -93,8 +93,8 @@ class Mqtt extends Component {
                   <Form.Item label="是否开启" name="flag" valuePropName={config.flag?'checked':null}>
                     <Switch checkedChildren="开启" unCheckedChildren="关闭" />
                   </Form.Item>
-                  <Form.Item label="MQTT连接状态" name="status" valuePropName={config.status?'checked':null}>
-                    <Switch disabled={true} checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} defaultChecked/>
+                  <Form.Item label="MQTT连接状态" name="status">
+                    {(!config.status)?<Badge status="warning" text="未连接" />:<Badge status="success" text="已连接" />}
                   </Form.Item>
                   <Form.Item label="服务器" name="host" initialValue={config.host} getValueFromEvent={ (e) => clearTrimValueEvent(e)}
                              rules={[{required: true, message: '请输入服务器'},{min: 4, message: '长度在 4 到 32 个字符'},{max: 30, message: '长度在 4 到 32 个字符'}]}>
